@@ -1,0 +1,672 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2438561D2438597C00487EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438561C2438597C00487EC6 /* AppDelegate.swift */; };
+		2438561F2438597C00487EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438561E2438597C00487EC6 /* ViewController.swift */; };
+		243856212438597E00487EC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 243856202438597E00487EC6 /* Assets.xcassets */; };
+		243856242438597E00487EC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243856222438597E00487EC6 /* Main.storyboard */; };
+		243856302438597F00487EC6 /* PhantomXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438562F2438597F00487EC6 /* PhantomXTests.swift */; };
+		2438588B2438C61D00487EC6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438588A2438C61D00487EC6 /* main.swift */; };
+		243858932438C81700487EC6 /* PhantomXTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 243858882438C61D00487EC6 /* PhantomXTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		243858952438C86B00487EC6 /* ProxyLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243858942438C86B00487EC6 /* ProxyLauncher.swift */; };
+		243858972438CA5100487EC6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243858962438CA5100487EC6 /* Util.swift */; };
+		243858992438CECE00487EC6 /* pac in Resources */ = {isa = PBXBuildFile; fileRef = 243858982438CECE00487EC6 /* pac */; };
+		B31A09567D9C7DEFCDD000AC /* Pods_PhantomXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */; };
+		D597A4BEB7E037428265FF8D /* Pods_PhantomX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228B910E6B52877E1F22FBD5 /* Pods_PhantomX.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2438562C2438597F00487EC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 243856112438597C00487EC6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 243856182438597C00487EC6;
+			remoteInfo = PhantomX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		243858862438C61D00487EC6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		243858922438C80F00487EC6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				243858932438C81700487EC6 /* PhantomXTool in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1CE363853B7896EC15106E8A /* Pods-PhantomX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomX.debug.xcconfig"; path = "Target Support Files/Pods-PhantomX/Pods-PhantomX.debug.xcconfig"; sourceTree = "<group>"; };
+		228B910E6B52877E1F22FBD5 /* Pods_PhantomX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhantomX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		243856192438597C00487EC6 /* PhantomX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhantomX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2438561C2438597C00487EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2438561E2438597C00487EC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		243856202438597E00487EC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		243856232438597E00487EC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		243856252438597E00487EC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		243856262438597E00487EC6 /* PhantomX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhantomX.entitlements; sourceTree = "<group>"; };
+		2438562B2438597F00487EC6 /* PhantomXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhantomXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2438562F2438597F00487EC6 /* PhantomXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhantomXTests.swift; sourceTree = "<group>"; };
+		243856312438597F00487EC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		243858882438C61D00487EC6 /* PhantomXTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhantomXTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		2438588A2438C61D00487EC6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		243858942438C86B00487EC6 /* ProxyLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyLauncher.swift; sourceTree = "<group>"; };
+		243858962438CA5100487EC6 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		243858982438CECE00487EC6 /* pac */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pac; sourceTree = "<group>"; };
+		62A6BAC80371E2BF4A88FD27 /* Pods-PhantomXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomXTests.release.xcconfig"; path = "Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests.release.xcconfig"; sourceTree = "<group>"; };
+		73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhantomXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C3E78D3AF78C89FB337CEE6 /* Pods-PhantomX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomX.release.xcconfig"; path = "Target Support Files/Pods-PhantomX/Pods-PhantomX.release.xcconfig"; sourceTree = "<group>"; };
+		9DB30B44973D7A3292C527C8 /* Pods-PhantomXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomXTests.debug.xcconfig"; path = "Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		243856162438597C00487EC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D597A4BEB7E037428265FF8D /* Pods_PhantomX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		243856282438597F00487EC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B31A09567D9C7DEFCDD000AC /* Pods_PhantomXTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		243858852438C61D00487EC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		243856102438597C00487EC6 = {
+			isa = PBXGroup;
+			children = (
+				2438561B2438597C00487EC6 /* PhantomX */,
+				2438562E2438597F00487EC6 /* PhantomXTests */,
+				243858892438C61D00487EC6 /* PhantomXTool */,
+				2438561A2438597C00487EC6 /* Products */,
+				FEA702B775BE2B1BBB70B8D1 /* Pods */,
+				B2EBA4870DA75C8DF305BA4E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2438561A2438597C00487EC6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				243856192438597C00487EC6 /* PhantomX.app */,
+				2438562B2438597F00487EC6 /* PhantomXTests.xctest */,
+				243858882438C61D00487EC6 /* PhantomXTool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2438561B2438597C00487EC6 /* PhantomX */ = {
+			isa = PBXGroup;
+			children = (
+				243858982438CECE00487EC6 /* pac */,
+				2438561C2438597C00487EC6 /* AppDelegate.swift */,
+				2438561E2438597C00487EC6 /* ViewController.swift */,
+				243858942438C86B00487EC6 /* ProxyLauncher.swift */,
+				243856202438597E00487EC6 /* Assets.xcassets */,
+				243856222438597E00487EC6 /* Main.storyboard */,
+				243856252438597E00487EC6 /* Info.plist */,
+				243856262438597E00487EC6 /* PhantomX.entitlements */,
+				243858962438CA5100487EC6 /* Util.swift */,
+			);
+			path = PhantomX;
+			sourceTree = "<group>";
+		};
+		2438562E2438597F00487EC6 /* PhantomXTests */ = {
+			isa = PBXGroup;
+			children = (
+				2438562F2438597F00487EC6 /* PhantomXTests.swift */,
+				243856312438597F00487EC6 /* Info.plist */,
+			);
+			path = PhantomXTests;
+			sourceTree = "<group>";
+		};
+		243858892438C61D00487EC6 /* PhantomXTool */ = {
+			isa = PBXGroup;
+			children = (
+				2438588A2438C61D00487EC6 /* main.swift */,
+			);
+			path = PhantomXTool;
+			sourceTree = "<group>";
+		};
+		B2EBA4870DA75C8DF305BA4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				228B910E6B52877E1F22FBD5 /* Pods_PhantomX.framework */,
+				73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FEA702B775BE2B1BBB70B8D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1CE363853B7896EC15106E8A /* Pods-PhantomX.debug.xcconfig */,
+				7C3E78D3AF78C89FB337CEE6 /* Pods-PhantomX.release.xcconfig */,
+				9DB30B44973D7A3292C527C8 /* Pods-PhantomXTests.debug.xcconfig */,
+				62A6BAC80371E2BF4A88FD27 /* Pods-PhantomXTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		243856182438597C00487EC6 /* PhantomX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 243856342438597F00487EC6 /* Build configuration list for PBXNativeTarget "PhantomX" */;
+			buildPhases = (
+				4CF67A24613B217094E82D82 /* [CP] Check Pods Manifest.lock */,
+				243856152438597C00487EC6 /* Sources */,
+				243856162438597C00487EC6 /* Frameworks */,
+				243856172438597C00487EC6 /* Resources */,
+				66C77012370898F701161ED7 /* [CP] Embed Pods Frameworks */,
+				243858922438C80F00487EC6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhantomX;
+			productName = PhantomX;
+			productReference = 243856192438597C00487EC6 /* PhantomX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2438562A2438597F00487EC6 /* PhantomXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 243856372438597F00487EC6 /* Build configuration list for PBXNativeTarget "PhantomXTests" */;
+			buildPhases = (
+				20E9AE30B65E3D44CE038DC3 /* [CP] Check Pods Manifest.lock */,
+				243856272438597F00487EC6 /* Sources */,
+				243856282438597F00487EC6 /* Frameworks */,
+				243856292438597F00487EC6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2438562D2438597F00487EC6 /* PBXTargetDependency */,
+			);
+			name = PhantomXTests;
+			productName = PhantomXTests;
+			productReference = 2438562B2438597F00487EC6 /* PhantomXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		243858872438C61D00487EC6 /* PhantomXTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2438588C2438C61D00487EC6 /* Build configuration list for PBXNativeTarget "PhantomXTool" */;
+			buildPhases = (
+				243858842438C61D00487EC6 /* Sources */,
+				243858852438C61D00487EC6 /* Frameworks */,
+				243858862438C61D00487EC6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhantomXTool;
+			productName = PhantomXTool;
+			productReference = 243858882438C61D00487EC6 /* PhantomXTool */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		243856112438597C00487EC6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = BinaryParadise;
+				TargetAttributes = {
+					243856182438597C00487EC6 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					2438562A2438597F00487EC6 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 243856182438597C00487EC6;
+					};
+					243858872438C61D00487EC6 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 243856142438597C00487EC6 /* Build configuration list for PBXProject "PhantomX" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 243856102438597C00487EC6;
+			productRefGroup = 2438561A2438597C00487EC6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				243856182438597C00487EC6 /* PhantomX */,
+				2438562A2438597F00487EC6 /* PhantomXTests */,
+				243858872438C61D00487EC6 /* PhantomXTool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		243856172438597C00487EC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				243858992438CECE00487EC6 /* pac in Resources */,
+				243856212438597E00487EC6 /* Assets.xcassets in Resources */,
+				243856242438597E00487EC6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		243856292438597F00487EC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20E9AE30B65E3D44CE038DC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhantomXTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4CF67A24613B217094E82D82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhantomX-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66C77012370898F701161ED7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhantomX/Pods-PhantomX-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhantomX/Pods-PhantomX-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhantomX/Pods-PhantomX-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		243856152438597C00487EC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2438561F2438597C00487EC6 /* ViewController.swift in Sources */,
+				2438561D2438597C00487EC6 /* AppDelegate.swift in Sources */,
+				243858952438C86B00487EC6 /* ProxyLauncher.swift in Sources */,
+				243858972438CA5100487EC6 /* Util.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		243856272438597F00487EC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				243856302438597F00487EC6 /* PhantomXTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		243858842438C61D00487EC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2438588B2438C61D00487EC6 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2438562D2438597F00487EC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 243856182438597C00487EC6 /* PhantomX */;
+			targetProxy = 2438562C2438597F00487EC6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		243856222438597E00487EC6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				243856232438597E00487EC6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		243856322438597F00487EC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		243856332438597F00487EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		243856352438597F00487EC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CE363853B7896EC15106E8A /* Pods-PhantomX.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PhantomX/PhantomX.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PhantomX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.PhantomX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		243856362438597F00487EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C3E78D3AF78C89FB337CEE6 /* Pods-PhantomX.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PhantomX/PhantomX.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PhantomX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.PhantomX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		243856382438597F00487EC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DB30B44973D7A3292C527C8 /* Pods-PhantomXTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PhantomXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.PhantomXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhantomX.app/Contents/MacOS/PhantomX";
+			};
+			name = Debug;
+		};
+		243856392438597F00487EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62A6BAC80371E2BF4A88FD27 /* Pods-PhantomXTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PhantomXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.PhantomXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhantomX.app/Contents/MacOS/PhantomX";
+			};
+			name = Release;
+		};
+		2438588D2438C61D00487EC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2438588E2438C61D00487EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		243856142438597C00487EC6 /* Build configuration list for PBXProject "PhantomX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				243856322438597F00487EC6 /* Debug */,
+				243856332438597F00487EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		243856342438597F00487EC6 /* Build configuration list for PBXNativeTarget "PhantomX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				243856352438597F00487EC6 /* Debug */,
+				243856362438597F00487EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		243856372438597F00487EC6 /* Build configuration list for PBXNativeTarget "PhantomXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				243856382438597F00487EC6 /* Debug */,
+				243856392438597F00487EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2438588C2438C61D00487EC6 /* Build configuration list for PBXNativeTarget "PhantomXTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2438588D2438C61D00487EC6 /* Debug */,
+				2438588E2438C61D00487EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 243856112438597C00487EC6 /* Project object */;
+}

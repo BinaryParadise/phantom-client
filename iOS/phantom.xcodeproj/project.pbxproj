@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2438560F243843DA00487EC6 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2438560E243843DA00487EC6 /* ExternalAccessory.framework */; };
 		247890D72430DAF600A606DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247890D62430DAF600A606DA /* AppDelegate.swift */; };
 		247890D92430DAF600A606DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247890D82430DAF600A606DA /* SceneDelegate.swift */; };
 		247890DB2430DAF600A606DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247890DA2430DAF600A606DA /* ViewController.swift */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2438560D243843DA00487EC6 /* phantom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = phantom.entitlements; sourceTree = "<group>"; };
+		2438560E243843DA00487EC6 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		247890D32430DAF600A606DA /* phantom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = phantom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		247890D62430DAF600A606DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		247890D82430DAF600A606DA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2438560F243843DA00487EC6 /* ExternalAccessory.framework in Frameworks */,
 				4F062BA4364654E1D6C437E2 /* Pods_phantom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +95,7 @@
 		247890D52430DAF600A606DA /* phantom */ = {
 			isa = PBXGroup;
 			children = (
+				2438560D243843DA00487EC6 /* phantom.entitlements */,
 				247890D62430DAF600A606DA /* AppDelegate.swift */,
 				247890D82430DAF600A606DA /* SceneDelegate.swift */,
 				247890DA2430DAF600A606DA /* ViewController.swift */,
@@ -114,6 +119,7 @@
 		2E84770B9F959C77797D6E1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2438560E243843DA00487EC6 /* ExternalAccessory.framework */,
 				8A133A61676D9C352E7F1166 /* Pods_phantom.framework */,
 				7E21B9C7D5F114F4C239100E /* Pods_phantomTests.framework */,
 			);
@@ -128,7 +134,6 @@
 				EB5465EEB3F32C8CDAC2D6AF /* Pods-phantomTests.debug.xcconfig */,
 				8D727876706EB1F876CA4E44 /* Pods-phantomTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -463,7 +468,9 @@
 			baseConfigurationReference = 6AC5C4CC83B9EED1F0816A1E /* Pods-phantom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = phantom/phantom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9V4T4T8D8H;
 				INFOPLIST_FILE = phantom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -481,7 +488,9 @@
 			baseConfigurationReference = C556DEA0E77F8F1475E864DF /* Pods-phantom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = phantom/phantom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9V4T4T8D8H;
 				INFOPLIST_FILE = phantom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
