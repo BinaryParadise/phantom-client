@@ -16,15 +16,18 @@ class ViewController: NSViewController {
     var asyncSock:GCDAsyncSocket?
     var isRunning = false
     var clients:[Int:ProxyNegotiation] = [:]
-    let sema = DispatchSemaphore.init(value: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         ProxyNegotiation.creatWSocks()
-        asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
-        startProxy(AnyClass.self)
+        
+        DispatchQueue.global().async {
+            semaphore.wait()
+            self.asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
+            self.startProxy(AnyClass.self)
+        }
     }
 
     override var representedObject: Any? {
@@ -42,6 +45,7 @@ class ViewController: NSViewController {
             } catch {
                 DDLogError("\(#function)+\(#line) \(error.localizedDescription)")
             }
+            semaphore.signal()
         }
     }
 }
@@ -49,8 +53,8 @@ class ViewController: NSViewController {
 /// 客户端代理协商
 extension ViewController: GCDAsyncSocketDelegate {
     func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
+        semaphore.wait();
         DDLogDebug("【\(newSocket.hash)】")
-        sema.wait();
         let proxy = idleProxy.removeLast()
         proxy.sock = newSocket
         clients[newSocket.hash] = proxy
@@ -69,7 +73,7 @@ extension ViewController: GCDAsyncSocketDelegate {
             if data.count > 0 {
                 dataForward(sock, data: data)
             } else {
-                sema.signal()
+                semaphore.signal()
             }
         default:
             dataForward(sock, data: data)
@@ -132,15 +136,19 @@ extension ViewController: GCDAsyncSocketDelegate {
         let proxyNe = clients[sock.hash]
         //原样转发，不作处理
         proxyNe?.proxyData = data
-        if atyp == 0x03 {
-//            proxyNe?.bindAddr = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
-            //DST.PORT代表远程服务器的端口，要访问哪个端口的意思，值长度2个字节
-//            let subData = NSData.init(data: data.subdata(in: Data.Index(data.count-2)..<data.count))
-        }
         
         var resData = Data.init()
         resData.append(0x05)
         resData.append(0x00)
+        if atyp == 0x03 {//路由规则
+            let host = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
+            if !(host?.contains("ip138.com"))! {
+                resData.append(0x02)
+                DDLogWarn("try connect \(host), rule not allowed")
+            }
+            //DST.PORT代表远程服务器的端口，要访问哪个端口的意思，值长度2个字节
+//            let subData = NSData.init(data: data.subdata(in: Data.Index(data.count-2)..<data.count))
+        }
         resData.append(0x00)
         resData.append(atyp)
         resData.append(0x04)

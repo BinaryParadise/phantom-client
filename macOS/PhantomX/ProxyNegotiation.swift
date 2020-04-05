@@ -11,8 +11,7 @@ import CocoaAsyncSocket
 import Starscream
 import CocoaLumberjack
 
-let WEBSOCKET_ADDR  = "192.168.50.64"
-let WEBSOCKET_PORT  = "9000"
+let WEBSOCKET_ADDR  = "http://phantom-core-imhav.run.goorm.io"
 
 #if DEBUG
 let TIME_OUT    = 180.0
@@ -39,6 +38,7 @@ enum SOCKS5_KEY:Int {
     case data_forward_try = 206
 }
 
+var semaphore = DispatchSemaphore.init(value: 10)
 var proxies:[ProxyNegotiation] = []
 var idleProxy:[ProxyNegotiation] = []
 
@@ -48,6 +48,7 @@ class ProxyNegotiation: NSObject {
     var proxyData: Data
     var webSocket:WebSocket?
     var connected = false
+    var idx = 0
     public var onEvent: ((WebSocketEvent) -> Void)?
 
     init(sock: GCDAsyncSocket?) {
@@ -57,7 +58,7 @@ class ProxyNegotiation: NSObject {
     }
     
     func createProxy() -> Void {
-        var request = URLRequest(url: URL(string: "ws://\(WEBSOCKET_ADDR):\(WEBSOCKET_PORT)/channel/neverland")!)
+        var request = URLRequest(url: URL(string: "\(WEBSOCKET_ADDR)/channel/neverland")!)
         request.timeoutInterval = 15 // Sets the timeout for the connection
         request.setValue("phantom-core", forHTTPHeaderField: "Sec-WebSocket-Protocol")
         webSocket = WebSocket(request: request)
@@ -65,8 +66,9 @@ class ProxyNegotiation: NSObject {
             switch event {
             case .connected(let headers):
                 self.connected = true
-                DDLogDebug("\(self.hash)已连接...")
+                semaphore.signal()
                 idleProxy.append(self)
+                DDLogDebug("[\(self.idx)]已连接...\(idleProxy.count)/\(proxies.count)")
             case .binary(let data):
                 self.didReceiveBinary(data: data)
             case .ping(_):
@@ -86,7 +88,10 @@ class ProxyNegotiation: NSObject {
                 break
             }
         }
-        webSocket?.connect()
+        DispatchQueue.global().async {
+            semaphore.wait()
+            self.webSocket?.connect()
+        }
     }
     
     func didReceiveBinary(data: Data) -> Void {
@@ -113,8 +118,9 @@ class ProxyNegotiation: NSObject {
 extension ProxyNegotiation {
     /// 创建10个连接对象备用
     static func creatWSocks() -> Void {
-        for _ in 0...9 {
+        for i in 0...9 {
             let proxy = ProxyNegotiation.init(sock: nil)
+            proxy.idx = i
             proxy.createProxy()
             proxies.append(proxy)
         }

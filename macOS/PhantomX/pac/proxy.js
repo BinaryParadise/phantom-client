@@ -4,7 +4,7 @@
 var proxy = "SOCKS5 127.0.0.1:12080; SOCKS 127.0.0.1:12080; DIRECT;";
 
 var rules = [
-  "*.ip138.com",
+  ".ip138.com",
   "|http:\/\/ip138.com",
 ];
 
