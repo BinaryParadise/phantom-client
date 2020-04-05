@@ -91,6 +91,8 @@ extension ViewController: GCDAsyncSocketDelegate {
             sock.readData(forKey: .data_forward)
         case .data_forward_res:
             sock.readData(forKey: .data_forward_try)
+        case .http_connected:
+            sock.readData(forKey: .data_forward_try)
         default:
             break
         }
@@ -102,6 +104,10 @@ extension ViewController: GCDAsyncSocketDelegate {
     }
     
     func handshake(_ sock: GCDAsyncSocket, data: Data) -> Void {
+        if data[0] == 0x43 {
+            httpProxy(sock, data: data)
+            return
+        }
         var method = "NO ACCEPTABLE METHODS"
         switch data[1] {
             case 0x00:method = "NO AUTHENTICATION REQUIRED"
@@ -118,6 +124,11 @@ extension ViewController: GCDAsyncSocketDelegate {
         resData.append(0x05)
         resData.append(0x00)
         sock.writeData(data: resData, forKey: .negotiation_res)
+    }
+    
+    func httpProxy(_ sock: GCDAsyncSocket, data: Data) -> Void {
+        let proxy = clients[sock.hash]
+        proxy?.httpConnect(data: data)
     }
     
     func clientConnect(_ sock: GCDAsyncSocket, data: Data) -> Void {

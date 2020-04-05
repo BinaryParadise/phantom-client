@@ -11,7 +11,7 @@ import CocoaAsyncSocket
 import Starscream
 import CocoaLumberjack
 
-let WEBSOCKET_ADDR  = "http://phantom-core-imhav.run.goorm.io"
+let WEBSOCKET_ADDR  = "http://127.0.0.1:9000"
 
 #if DEBUG
 let TIME_OUT    = 180.0
@@ -36,6 +36,8 @@ enum SOCKS5_KEY:Int {
     case data_forward_res = 205
     /// 确认是否还有转发请求
     case data_forward_try = 206
+    /// HTTP代理已连接
+    case http_connected = 207
 }
 
 var semaphore = DispatchSemaphore.init(value: 10)
@@ -49,6 +51,7 @@ class ProxyNegotiation: NSObject {
     var webSocket:WebSocket?
     var connected = false
     var idx = 0
+    var httpProxy = false
     public var onEvent: ((WebSocketEvent) -> Void)?
 
     init(sock: GCDAsyncSocket?) {
@@ -97,12 +100,28 @@ class ProxyNegotiation: NSObject {
     func didReceiveBinary(data: Data) -> Void {
         DDLogWarn("[\(data.count)]\(String.init(data: data, encoding: .utf8))")
         if data.count > 0 {
-            var newData = data;            
-            sock?.writeData(data: newData, forKey: .data_forward_res)
+            if httpProxy {
+                sock?.writeData(data: data, forKey: .http_connected)
+            } else {
+                sock?.writeData(data: data, forKey: .data_forward_res)
+            }
         }
     }
     
     func forward(data: Data) -> Void {
+        if self.connected {
+            var encryptData = Data()
+            encryptData.append(0x01)
+            encryptData.append(proxyData)
+            encryptData.append(data)
+            webSocket?.write(data: encryptData, completion: {
+                DDLogDebug("Data forward to server.")
+            })
+        }
+    }
+    
+    func httpConnect(data: Data) -> Void {
+        httpProxy = true
         if self.connected {
             var encryptData = Data()
             encryptData.append(0x01)
