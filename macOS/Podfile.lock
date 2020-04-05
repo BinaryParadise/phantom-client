@@ -1,20 +1,56 @@
 PODS:
+  - Canary/Core (0.2.1):
+    - CocoaLumberjack (<= 3.5.2)
+    - FMDB (~> 2.7.0)
+    - MJExtension
+    - SAMKeychain (~> 1.5)
+    - SocketRocket (~> 0.5)
+  - Canary/Swift (0.2.1):
+    - Canary/Core
+    - CocoaLumberjack/Swift (<= 3.5.2)
+    - MJExtension
+    - SAMKeychain (~> 1.5)
+    - SocketRocket (~> 0.5)
   - CocoaAsyncSocket (7.6.4)
+  - CocoaLumberjack (3.5.2):
+    - CocoaLumberjack/Core (= 3.5.2)
+  - CocoaLumberjack/Core (3.5.2)
+  - CocoaLumberjack/Swift (3.5.2):
+    - CocoaLumberjack/Core
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - MJExtension (3.2.1)
+  - SAMKeychain (1.5.3)
+  - SocketRocket (0.5.1)
   - Starscream (4.0.0)
 
 DEPENDENCIES:
+  - Canary/Swift
   - CocoaAsyncSocket
   - Starscream
 
 SPEC REPOS:
   trunk:
+    - Canary
     - CocoaAsyncSocket
+    - CocoaLumberjack
+    - FMDB
+    - MJExtension
+    - SAMKeychain
+    - SocketRocket
     - Starscream
 
 SPEC CHECKSUMS:
+  Canary: 9470c1df8ce3b32cf2cc163f043c514dec2b386a
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   Starscream: 04b26f02727e10a002e6b5d21b188ba0d049910b
 
-PODFILE CHECKSUM: 22b4e2998426adaaf9fd7cb8e28e28f1adb318be
+PODFILE CHECKSUM: c9851e88b407f12a54d5ace29413be7814b7e176
 
 COCOAPODS: 1.9.1

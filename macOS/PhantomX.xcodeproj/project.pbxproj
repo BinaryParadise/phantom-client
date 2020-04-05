@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241A04A4243960C8003D611F /* ProxyNegotiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A04A3243960C8003D611F /* ProxyNegotiation.swift */; };
 		2438561D2438597C00487EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438561C2438597C00487EC6 /* AppDelegate.swift */; };
 		2438561F2438597C00487EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438561E2438597C00487EC6 /* ViewController.swift */; };
 		243856212438597E00487EC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 243856202438597E00487EC6 /* Assets.xcassets */; };
@@ -56,6 +57,8 @@
 /* Begin PBXFileReference section */
 		1CE363853B7896EC15106E8A /* Pods-PhantomX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomX.debug.xcconfig"; path = "Target Support Files/Pods-PhantomX/Pods-PhantomX.debug.xcconfig"; sourceTree = "<group>"; };
 		228B910E6B52877E1F22FBD5 /* Pods_PhantomX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhantomX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		241A04A3243960C8003D611F /* ProxyNegotiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyNegotiation.swift; sourceTree = "<group>"; };
+		241A04A62439933A003D611F /* PhantomX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhantomX-Bridging-Header.h"; sourceTree = "<group>"; };
 		243856192438597C00487EC6 /* PhantomX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhantomX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2438561C2438597C00487EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2438561E2438597C00487EC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -132,12 +135,14 @@
 				243858982438CECE00487EC6 /* pac */,
 				2438561C2438597C00487EC6 /* AppDelegate.swift */,
 				2438561E2438597C00487EC6 /* ViewController.swift */,
+				241A04A3243960C8003D611F /* ProxyNegotiation.swift */,
 				243858942438C86B00487EC6 /* ProxyLauncher.swift */,
 				243856202438597E00487EC6 /* Assets.xcassets */,
 				243856222438597E00487EC6 /* Main.storyboard */,
 				243856252438597E00487EC6 /* Info.plist */,
 				243856262438597E00487EC6 /* PhantomX.entitlements */,
 				243858962438CA5100487EC6 /* Util.swift */,
+				241A04A62439933A003D611F /* PhantomX-Bridging-Header.h */,
 			);
 			path = PhantomX;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				TargetAttributes = {
 					243856182438597C00487EC6 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 					2438562A2438597F00487EC6 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -372,6 +378,7 @@
 				2438561F2438597C00487EC6 /* ViewController.swift in Sources */,
 				2438561D2438597C00487EC6 /* AppDelegate.swift in Sources */,
 				243858952438C86B00487EC6 /* ProxyLauncher.swift in Sources */,
+				241A04A4243960C8003D611F /* ProxyNegotiation.swift in Sources */,
 				243858972438CA5100487EC6 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,9 +539,11 @@
 			baseConfigurationReference = 1CE363853B7896EC15106E8A /* Pods-PhantomX.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PhantomX/PhantomX.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9V4T4T8D8H;
 				INFOPLIST_FILE = PhantomX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -542,6 +551,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.PhantomX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhantomX/PhantomX-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -551,9 +562,11 @@
 			baseConfigurationReference = 7C3E78D3AF78C89FB337CEE6 /* Pods-PhantomX.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PhantomX/PhantomX.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9V4T4T8D8H;
 				INFOPLIST_FILE = PhantomX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -561,6 +574,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.PhantomX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhantomX/PhantomX-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

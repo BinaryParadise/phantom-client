@@ -7,6 +7,7 @@ target 'PhantomX' do
   
   pod 'Starscream'
   pod 'CocoaAsyncSocket'
+  pod 'Canary/Swift'
 #  pod 'Swifter'
 
   # Pods for PhantomX

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Canary
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -15,7 +16,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        print(Bundle.main.bundlePath)
+        let manager = CNManager.init()
+        manager?.appKey = "com.binaryparadise.neverland"
+        manager?.enableDebug = true
+        manager?.baseURL = URL.init(string: "https://yuqi.neverland.life")
+        manager?.startLogMonitor({ () -> [String : Any]? in
+            return [:]
+        })
+        DDLogInfo(NSHomeDirectory())
         ProxyLauncher.startHttpServer()
     }
 

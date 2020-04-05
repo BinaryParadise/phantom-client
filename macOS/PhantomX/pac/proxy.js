@@ -4,8 +4,8 @@
 var proxy = "SOCKS5 127.0.0.1:12080; SOCKS 127.0.0.1:12080; DIRECT;";
 
 var rules = [
-  "tool.chinaz.com",
-  "|http:\/\/chinaz.com",
+  "*.ip138.com",
+  "|http:\/\/ip138.com",
 ];
 
 /*
