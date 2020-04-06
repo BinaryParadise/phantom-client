@@ -11,7 +11,11 @@ import CocoaAsyncSocket
 import Starscream
 import CocoaLumberjack
 
-let WEBSOCKET_ADDR  = "http://127.0.0.1:9000"
+#if GOORM_ENABLE
+let WEBSOCKET_ADDR  = "ws://54.180.141.9:53215"
+#else
+let WEBSOCKET_ADDR  = "http://127.0.0.1:9000";
+#endif
 
 #if DEBUG
 let TIME_OUT    = 180.0
@@ -40,7 +44,7 @@ enum SOCKS5_KEY:Int {
     case http_connected = 207
 }
 
-var semaphore = DispatchSemaphore.init(value: 10)
+var semaphore = DispatchSemaphore.init(value: 1)
 var proxies:[ProxyNegotiation] = []
 var idleProxy:[ProxyNegotiation] = []
 
@@ -61,6 +65,8 @@ class ProxyNegotiation: NSObject {
     }
     
     func createProxy() -> Void {
+        semaphore.wait()
+        idx+=1
         var request = URLRequest(url: URL(string: "\(WEBSOCKET_ADDR)/channel/neverland")!)
         request.timeoutInterval = 15 // Sets the timeout for the connection
         request.setValue("phantom-core", forHTTPHeaderField: "Sec-WebSocket-Protocol")
@@ -84,6 +90,7 @@ class ProxyNegotiation: NSObject {
                 break
             case .cancelled:
                 self.connected = false
+                DDLogVerbose("")
             case .error(let error):
                 self.connected = false
                 DDLogError("\(error?.localizedDescription)")
@@ -91,10 +98,7 @@ class ProxyNegotiation: NSObject {
                 break
             }
         }
-        DispatchQueue.global().async {
-            semaphore.wait()
-            self.webSocket?.connect()
-        }
+        self.webSocket?.connect()        
     }
     
     func didReceiveBinary(data: Data) -> Void {
@@ -137,12 +141,9 @@ class ProxyNegotiation: NSObject {
 extension ProxyNegotiation {
     /// 创建10个连接对象备用
     static func creatWSocks() -> Void {
-        for i in 0...9 {
-            let proxy = ProxyNegotiation.init(sock: nil)
-            proxy.idx = i
-            proxy.createProxy()
-            proxies.append(proxy)
-        }
+        let proxy = ProxyNegotiation.init(sock: nil)
+        proxy.createProxy()
+        proxies.append(proxy)
     }
 }
 

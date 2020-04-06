@@ -4,8 +4,8 @@
 var proxy = "SOCKS5 127.0.0.1:12080; SOCKS 127.0.0.1:12080; DIRECT;";
 
 var rules = [
-  ".ip138.com",
-  "|http:\/\/ip138.com",
+  "*.ip138.com",
+  "ip138.com",
 ];
 
 /*
@@ -774,7 +774,9 @@ for (var i = 0; i < rules.length; i++) {
 
 function FindProxyForURL(url, host) {
   if (defaultMatcher.matchesAny(url, host) instanceof BlockingFilter) {
+    alert(host+" "+proxy)
     return proxy;
   }
+    alert(host+" "+direct)
   return direct;
 }

@@ -11,7 +11,7 @@ import CocoaAsyncSocket
 
 let AppResourcesPath = Bundle.main.bundlePath + "/Contents/Resources"
 var HttpServerPacPort = UserDefaults.getString(forKey: .localPacPort) ?? "11085"
-var PACUrl = "http://192.168.50.64:" + String(HttpServerPacPort) + "/pac/proxy.js"
+var PACUrl = "http://127.0.0.1:" + String(HttpServerPacPort) + "/pac/proxy.js"
 
 var webServer = GCDAsyncSocket()
 

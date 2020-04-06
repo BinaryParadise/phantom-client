@@ -56,7 +56,7 @@ class PhantomXTool: NSObject {
             }
 
             // set system proxy
-            let prefRef = SCPreferencesCreateWithAuthorization(kCFAllocatorDefault, "PhantomXTool" as CFString, nil, authRef)!
+            let prefRef = SCPreferencesCreateWithAuthorization(kCFAllocatorDefault, "PhantomX" as CFString, nil, authRef)!
             let sets = SCPreferencesGetValue(prefRef, kSCPrefNetworkServices)!
 
             // backup system proxy
@@ -116,12 +116,13 @@ class PhantomXTool: NSObject {
                             proxies = nowSet["Proxies"] as! [NSObject: AnyObject];
                         }
                     }
-
+                    
                     SCPreferencesPathSetValue(prefRef, "/\(kSCPrefNetworkServices)/\(key)/\(kSCEntNetProxies)" as CFString, proxies as CFDictionary)
                 }
             }
 
             // commit to system preferences.
+            // 可能不会弹权限确认窗口
             let commitRet = SCPreferencesCommitChanges(prefRef)
             let applyRet = SCPreferencesApplyChanges(prefRef)
             SCPreferencesSynchronize(prefRef)
