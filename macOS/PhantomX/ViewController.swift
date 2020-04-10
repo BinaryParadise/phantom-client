@@ -22,7 +22,7 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
         ProxyNegotiation.creatWSocks()
-        
+
         DispatchQueue.global().async {
             semaphore.wait()
             self.asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
@@ -152,11 +152,11 @@ extension ViewController: GCDAsyncSocketDelegate {
         resData.append(0x05)
         resData.append(0x00)
         if atyp == 0x03 {//路由规则
-            let host = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
-            if !(host?.contains("ip138.com"))! {
-                resData.append(0x02)
-                DDLogWarn("try connect \(host), rule not allowed")
-            }
+//            let host = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
+//            if !(host?.contains("ip138.com"))! {
+//                resData.append(0x02)
+//                DDLogWarn("try connect \(host), rule not allowed")
+//            }
             //DST.PORT代表远程服务器的端口，要访问哪个端口的意思，值长度2个字节
 //            let subData = NSData.init(data: data.subdata(in: Data.Index(data.count-2)..<data.count))
         }

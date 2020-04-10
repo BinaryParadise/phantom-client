@@ -46,7 +46,7 @@ class ProxyLauncher: NSObject {
         do {
             try shared.asyncSock?.accept(onPort: UInt16(HttpServerPacPort)!)
             print("webServer.start at:\(HttpServerPacPort)\n")
-            ProxyLauncher.setSystemProxy(mode: .pac, httpPort: "2080", sockPort: "")
+//            ProxyLauncher.setSystemProxy(mode: .pac, httpPort: "2080", sockPort: "")
         } catch {
             print("\(#function)+\(#line) webServer\(HttpServerPacPort).start error:\(error.localizedDescription)")
         }

@@ -12,9 +12,9 @@ import Starscream
 import CocoaLumberjack
 
 #if GOORM_ENABLE
-let WEBSOCKET_ADDR  = "ws://54.180.141.9:53215"
+let WEBSOCKET_ADDR  = "ws://13.125.121.64:58031"
 #else
-let WEBSOCKET_ADDR  = "http://127.0.0.1:9000";
+let WEBSOCKET_ADDR  = "https://yuqi.neverland.life/phamcore";
 #endif
 
 #if DEBUG
@@ -44,7 +44,7 @@ enum SOCKS5_KEY:Int {
     case http_connected = 207
 }
 
-var semaphore = DispatchSemaphore.init(value: 1)
+var semaphore = DispatchSemaphore.init(value: 10)
 var proxies:[ProxyNegotiation] = []
 var idleProxy:[ProxyNegotiation] = []
 
@@ -65,8 +65,6 @@ class ProxyNegotiation: NSObject {
     }
     
     func createProxy() -> Void {
-        semaphore.wait()
-        idx+=1
         var request = URLRequest(url: URL(string: "\(WEBSOCKET_ADDR)/channel/neverland")!)
         request.timeoutInterval = 15 // Sets the timeout for the connection
         request.setValue("phantom-core", forHTTPHeaderField: "Sec-WebSocket-Protocol")
@@ -75,9 +73,9 @@ class ProxyNegotiation: NSObject {
             switch event {
             case .connected(let headers):
                 self.connected = true
-                semaphore.signal()
                 idleProxy.append(self)
                 DDLogDebug("[\(self.idx)]已连接...\(idleProxy.count)/\(proxies.count)")
+                semaphore.signal()
             case .binary(let data):
                 self.didReceiveBinary(data: data)
             case .ping(_):
@@ -93,11 +91,12 @@ class ProxyNegotiation: NSObject {
                 DDLogVerbose("")
             case .error(let error):
                 self.connected = false
-                DDLogError("\(error?.localizedDescription)")
+                DDLogError("\(WEBSOCKET_ADDR):\(error?.localizedDescription)")
             default :
                 break
             }
         }
+        DDLogDebug("开始连接")
         self.webSocket?.connect()        
     }
     
@@ -141,9 +140,15 @@ class ProxyNegotiation: NSObject {
 extension ProxyNegotiation {
     /// 创建10个连接对象备用
     static func creatWSocks() -> Void {
-        let proxy = ProxyNegotiation.init(sock: nil)
-        proxy.createProxy()
-        proxies.append(proxy)
+        for i in 0...5 {
+            let proxy = ProxyNegotiation.init(sock: nil)
+            proxy.idx = i
+            proxy.createProxy()
+            proxies.append(proxy)
+            DispatchQueue.global().async {
+                semaphore.wait()
+            }
+        }
     }
 }
 
