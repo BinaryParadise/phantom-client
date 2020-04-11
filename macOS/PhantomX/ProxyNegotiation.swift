@@ -11,11 +11,8 @@ import CocoaAsyncSocket
 import Starscream
 import CocoaLumberjack
 
-#if GOORM_ENABLE
-let WEBSOCKET_ADDR  = "ws://13.125.121.64:58031"
-#else
-let WEBSOCKET_ADDR  = "https://yuqi.neverland.life/phamcore";
-#endif
+//let WEBSOCKET_ADDR  = "wss://52.79.227.149:52771/phantom"
+let WEBSOCKET_ADDR  = "wss://phantom.neverland.life/huanying";
 
 #if DEBUG
 let TIME_OUT    = 180.0
@@ -44,7 +41,7 @@ enum SOCKS5_KEY:Int {
     case http_connected = 207
 }
 
-var semaphore = DispatchSemaphore.init(value: 10)
+var semaphore = DispatchSemaphore.init(value: 6)
 var proxies:[ProxyNegotiation] = []
 var idleProxy:[ProxyNegotiation] = []
 
@@ -65,10 +62,11 @@ class ProxyNegotiation: NSObject {
     }
     
     func createProxy() -> Void {
-        var request = URLRequest(url: URL(string: "\(WEBSOCKET_ADDR)/channel/neverland")!)
+        var request = URLRequest(url: URL(string: WEBSOCKET_ADDR)!)
         request.timeoutInterval = 15 // Sets the timeout for the connection
         request.setValue("phantom-core", forHTTPHeaderField: "Sec-WebSocket-Protocol")
-        webSocket = WebSocket(request: request)
+        let pinner = FoundationSecurity(allowSelfSigned: true)
+        webSocket = WebSocket(request: request, certPinner: pinner)
         webSocket?.onEvent = { event in
             switch event {
             case .connected(let headers):
@@ -91,7 +89,7 @@ class ProxyNegotiation: NSObject {
                 DDLogVerbose("")
             case .error(let error):
                 self.connected = false
-                DDLogError("\(WEBSOCKET_ADDR):\(error?.localizedDescription)")
+                DDLogError("\(WEBSOCKET_ADDR) \(error)")
             default :
                 break
             }
@@ -149,6 +147,13 @@ extension ProxyNegotiation {
                 semaphore.wait()
             }
         }
+    }
+}
+
+// 自定义证书校验
+extension ProxyNegotiation: CertificatePinning {
+    func evaluateTrust(trust: SecTrust, domain: String?, completion: ((PinningState) -> ())) {
+        completion(.success)
     }
 }
 
