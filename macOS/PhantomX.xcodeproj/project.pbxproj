@@ -12,12 +12,13 @@
 		2438561F2438597C00487EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438561E2438597C00487EC6 /* ViewController.swift */; };
 		243856212438597E00487EC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 243856202438597E00487EC6 /* Assets.xcassets */; };
 		243856242438597E00487EC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243856222438597E00487EC6 /* Main.storyboard */; };
-		243856302438597F00487EC6 /* PhantomXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438562F2438597F00487EC6 /* PhantomXTests.swift */; };
+		243856302438597F00487EC6 /* PhantomXTestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438562F2438597F00487EC6 /* PhantomXTestSpec.swift */; };
 		2438588B2438C61D00487EC6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438588A2438C61D00487EC6 /* main.swift */; };
 		243858932438C81700487EC6 /* PhantomXTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 243858882438C61D00487EC6 /* PhantomXTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		243858952438C86B00487EC6 /* ProxyLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243858942438C86B00487EC6 /* ProxyLauncher.swift */; };
 		243858972438CA5100487EC6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243858962438CA5100487EC6 /* Util.swift */; };
 		243858992438CECE00487EC6 /* pac in Resources */ = {isa = PBXBuildFile; fileRef = 243858982438CECE00487EC6 /* pac */; };
+		247FC7EC2441C04500350A32 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247FC7EB2441C04500350A32 /* DataUtil.swift */; };
 		B31A09567D9C7DEFCDD000AC /* Pods_PhantomXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */; };
 		D597A4BEB7E037428265FF8D /* Pods_PhantomX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228B910E6B52877E1F22FBD5 /* Pods_PhantomX.framework */; };
 /* End PBXBuildFile section */
@@ -67,13 +68,14 @@
 		243856252438597E00487EC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		243856262438597E00487EC6 /* PhantomX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhantomX.entitlements; sourceTree = "<group>"; };
 		2438562B2438597F00487EC6 /* PhantomXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhantomXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2438562F2438597F00487EC6 /* PhantomXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhantomXTests.swift; sourceTree = "<group>"; };
+		2438562F2438597F00487EC6 /* PhantomXTestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhantomXTestSpec.swift; sourceTree = "<group>"; };
 		243856312438597F00487EC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		243858882438C61D00487EC6 /* PhantomXTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhantomXTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		2438588A2438C61D00487EC6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		243858942438C86B00487EC6 /* ProxyLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyLauncher.swift; sourceTree = "<group>"; };
 		243858962438CA5100487EC6 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		243858982438CECE00487EC6 /* pac */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pac; sourceTree = "<group>"; };
+		247FC7EB2441C04500350A32 /* DataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
 		62A6BAC80371E2BF4A88FD27 /* Pods-PhantomXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomXTests.release.xcconfig"; path = "Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests.release.xcconfig"; sourceTree = "<group>"; };
 		73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhantomXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C3E78D3AF78C89FB337CEE6 /* Pods-PhantomX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomX.release.xcconfig"; path = "Target Support Files/Pods-PhantomX/Pods-PhantomX.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				243856262438597E00487EC6 /* PhantomX.entitlements */,
 				243858962438CA5100487EC6 /* Util.swift */,
 				241A04A62439933A003D611F /* PhantomX-Bridging-Header.h */,
+				247FC7EB2441C04500350A32 /* DataUtil.swift */,
 			);
 			path = PhantomX;
 			sourceTree = "<group>";
@@ -150,7 +153,7 @@
 		2438562E2438597F00487EC6 /* PhantomXTests */ = {
 			isa = PBXGroup;
 			children = (
-				2438562F2438597F00487EC6 /* PhantomXTests.swift */,
+				2438562F2438597F00487EC6 /* PhantomXTestSpec.swift */,
 				243856312438597F00487EC6 /* Info.plist */,
 			);
 			path = PhantomXTests;
@@ -215,6 +218,7 @@
 				243856272438597F00487EC6 /* Sources */,
 				243856282438597F00487EC6 /* Frameworks */,
 				243856292438597F00487EC6 /* Resources */,
+				EA795572F2015E2011BFFF73 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -368,6 +372,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhantomX/Pods-PhantomX-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EA795572F2015E2011BFFF73 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -375,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247FC7EC2441C04500350A32 /* DataUtil.swift in Sources */,
 				2438561F2438597C00487EC6 /* ViewController.swift in Sources */,
 				2438561D2438597C00487EC6 /* AppDelegate.swift in Sources */,
 				243858952438C86B00487EC6 /* ProxyLauncher.swift in Sources */,
@@ -387,7 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				243856302438597F00487EC6 /* PhantomXTests.swift in Sources */,
+				243856302438597F00487EC6 /* PhantomXTestSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
