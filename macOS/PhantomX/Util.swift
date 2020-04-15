@@ -49,3 +49,13 @@ extension Int {
                 UInt8(truncatingIfNeeded: UInt)]
     }
 }
+
+extension Data {
+    func toUInt16() -> UInt16 {
+        var value : UInt16 = 0
+        let data = NSData(bytes: [UInt8](self), length: self.count)
+        data.getBytes(&value, length: self.count)
+        value = UInt16(bigEndian: value)
+        return value
+    }
+}

@@ -15,16 +15,14 @@ let HTTPPort = 12080
 class ViewController: NSViewController {
     var asyncSock:GCDAsyncSocket?
     var isRunning = false
-    var clients:[Int:ProxyNegotiation] = [:]
+    var clients:[Int:Socket5Proxy] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        ProxyNegotiation.creatWSocks()
 
         DispatchQueue.global().async {
-            semaphore.wait()
             self.asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
             self.startProxy(AnyClass.self)
         }
@@ -45,7 +43,6 @@ class ViewController: NSViewController {
             } catch {
                 DDLogError("\(#function)+\(#line) \(error.localizedDescription)")
             }
-            semaphore.signal()
         }
     }
 }
@@ -53,16 +50,12 @@ class ViewController: NSViewController {
 /// 客户端代理协商
 extension ViewController: GCDAsyncSocketDelegate {
     func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
-        semaphore.wait();
-        DDLogDebug("【\(newSocket.hash)】")
-        let proxy = idleProxy.removeLast()
-        proxy.sock = newSocket
-        clients[newSocket.hash] = proxy
+        clients[newSocket.hash] = Socket5Proxy.init(sock: newSocket)
         newSocket.readData(forKey: .unspecified)
     }
     
     func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
-        DDLogInfo("【\(sock.hash)-\(tag)】> \(data.count)")
+        DDLogInfo("【\(tag)】...\(data.count)")
         let readTag = SOCKS5_KEY(rawValue: tag)
         switch readTag {
         case .unspecified:
@@ -70,11 +63,7 @@ extension ViewController: GCDAsyncSocketDelegate {
         case .connect:
             clientConnect(sock, data: data)
         case .data_forward_try:
-            if data.count > 0 {
-                dataForward(sock, data: data)
-            } else {
-                semaphore.signal()
-            }
+            dataForward(sock, data: data)
         default:
             dataForward(sock, data: data)
             break
@@ -82,7 +71,7 @@ extension ViewController: GCDAsyncSocketDelegate {
     }
     
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        DDLogDebug("【\(sock.hash)-\(tag)】")
+        DDLogDebug("【\(tag)】")
         let writeTag = SOCKS5_KEY(rawValue: tag)
         switch writeTag {
         case .negotiation_res:
@@ -90,24 +79,21 @@ extension ViewController: GCDAsyncSocketDelegate {
         case .connect_res:
             sock.readData(forKey: .data_forward)
         case .data_forward_res:
-            sock.readData(forKey: .data_forward_try)
+            sock.readData(forKey: .data_forward_try, withTimeout: 3)
         case .http_connected:
-            sock.readData(forKey: .data_forward_try)
+            sock.readData(forKey: .data_forward_try, withTimeout: 3)
         default:
             break
         }
     }
     
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-        DDLogWarn("【\(sock.hash)】\(err)")
-        clients.removeValue(forKey: sock.hash)
+        DDLogWarn("\(err)")
+        let proxy = clients.removeValue(forKey: sock.hash)
+        proxy?.clear()
     }
     
     func handshake(_ sock: GCDAsyncSocket, data: Data) -> Void {
-        if data[0] == 0x43 {
-            httpProxy(sock, data: data)
-            return
-        }
         var method = "NO ACCEPTABLE METHODS"
         switch data[1] {
             case 0x00:method = "NO AUTHENTICATION REQUIRED"
@@ -126,11 +112,6 @@ extension ViewController: GCDAsyncSocketDelegate {
         sock.writeData(data: resData, forKey: .negotiation_res)
     }
     
-    func httpProxy(_ sock: GCDAsyncSocket, data: Data) -> Void {
-        let proxy = clients[sock.hash]
-        proxy?.httpConnect(data: data)
-    }
-    
     func clientConnect(_ sock: GCDAsyncSocket, data: Data) -> Void {
         //CONNECT X’01’
         //BIND X’02’
@@ -144,38 +125,49 @@ extension ViewController: GCDAsyncSocketDelegate {
         let atyp = data[3]
         assert(atyp == 0x03)
         //DST.ADDR代表远程服务器的地址，根据ATYP进行解析，值长度不定。
-        let proxyNe = clients[sock.hash]
-        //原样转发，不作处理
-        proxyNe?.proxyData = data
-        
-        var resData = Data.init()
-        resData.append(0x05)
-        resData.append(0x00)
+        let proxy = clients[sock.hash]
+        clients[sock.hash] = proxy
+        var hostAddr:String?
+        // DST.PORT代表远程服务器的端口，要访问哪个端口的意思，值长度2个字节
+        let portData = data.subdata(in: Data.Index(data.count-2)..<data.count)
         if atyp == 0x03 {//路由规则
-//            let host = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
-//            if !(host?.contains("ip138.com"))! {
-//                resData.append(0x02)
-//                DDLogWarn("try connect \(host), rule not allowed")
-//            }
-            //DST.PORT代表远程服务器的端口，要访问哪个端口的意思，值长度2个字节
-//            let subData = NSData.init(data: data.subdata(in: Data.Index(data.count-2)..<data.count))
+            hostAddr = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
+        } else if atyp == 0x04 {
+            hostAddr = String.init(data: data.subdata(in: 5..<11), encoding: .utf8)
+        } else {
+            hostAddr = String.init(data: data.subdata(in: 5..<9), encoding: .utf8)
         }
-        resData.append(0x00)
-        resData.append(atyp)
-        resData.append(0x04)
-        resData.append(0x7F)
-        resData.append(0x00)
-        resData.append(0x00)
-        resData.append(0x01)
-        resData.append(0x2F)
-        resData.append(0x30)
-        sock.writeData(data: resData, forKey: .connect_res)
+        proxy?.startConnect(address: hostAddr, port: Int(portData.toUInt16()), completion: { (connected) in
+            var resData = Data.init()
+            resData.append(0x05)
+            //状态
+            //0x00 = succeeded
+            //0x01 = general SOCKS server failure
+            //0x02 = connection not allowed by ruleset
+            //0x03 = Network unreachable
+            //0x04 = Host unreachable
+            //0x05 = Connection refused
+            //0x06 = TTL expired
+            //0x07 = Command not supported
+            //0x08 = Address type not supported
+            //0x09 = to 0xFF unassigned
+            resData.append(connected ? 0x00:0x01)
+            resData.append(0x00)
+            resData.append(atyp)
+            resData.append(0x04)
+            resData.append(0x7F)
+            resData.append(0x00)
+            resData.append(0x00)
+            resData.append(contentsOf: HTTPPort.toUInt16())
+            resData.append(0x30)
+            sock.writeData(data: resData, forKey: .connect_res)
+        })
     }
     
     func dataForward(_ sock: GCDAsyncSocket, data: Data) -> Void {
-        let proxyNe = clients[sock.hash]
-        if (proxyNe != nil) {
-            proxyNe?.forward(data: data)
+        let proxy = clients[sock.hash]
+        if (proxy != nil) {
+            proxy?.forward(data: data)
         }
     }
 }
