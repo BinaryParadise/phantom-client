@@ -27,11 +27,8 @@ class ProxyLauncher: NSObject {
     static let shared = ProxyLauncher()
     var asyncSock:GCDAsyncSocket?
     var clientSock:GCDAsyncSocket?
+    let proxyAgent = ProxyAgent.init()
 
-    private override init() {
-        super.init()
-        asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
-    }
     static func setSystemProxy(mode: RunMode, httpPort: String = "", sockPort: String = "") {
         let task = Process.launchedProcess(launchPath: AppResourcesPath+"/PhantomXTool", arguments: ["-mode", mode.rawValue, "-pac-url", PACUrl, "-http-port", httpPort, "-sock-port", sockPort])
         task.waitUntilExit()
@@ -42,13 +39,24 @@ class ProxyLauncher: NSObject {
         }
     }
     
-    static func startHttpServer() {
+    func startProxy() {
         do {
-            try shared.asyncSock?.accept(onPort: UInt16(HttpServerPacPort)!)
+            asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
+            try asyncSock?.accept(onPort: UInt16(HttpServerPacPort)!)
             print("webServer.start at:\(HttpServerPacPort)\n")
+            proxyAgent.startProxy()
 //            ProxyLauncher.setSystemProxy(mode: .pac, httpPort: "2080", sockPort: "")
         } catch {
             print("\(#function)+\(#line) webServer\(HttpServerPacPort).start error:\(error.localizedDescription)")
+        }
+    }
+    
+    func stopProxy() {
+        do {
+            asyncSock?.disconnect()
+            proxyAgent.stopProxy()
+        } catch {
+            
         }
     }
 }

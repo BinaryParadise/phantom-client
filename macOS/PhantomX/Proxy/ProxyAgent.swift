@@ -1,54 +1,44 @@
 //
-//  ViewController.swift
+//  ProxyAgent.swift
 //  PhantomX
 //
-//  Created by Rake Yang on 2020/4/4.
+//  Created by Rake Yang on 2020/4/17.
 //  Copyright © 2020 BinaryParadise. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 import CocoaAsyncSocket
 import CocoaLumberjack
+import Canary
 
 let HTTPPort = 12080
 
-class ViewController: NSViewController {
+class ProxyAgent: NSObject {
     var asyncSock:GCDAsyncSocket?
     var isRunning = false
     var clients:[Int:Socket5Proxy] = [:]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-
-        DispatchQueue.global().async {
-            self.asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
-            self.startProxy(AnyClass.self)
+    
+    func startProxy() -> Void {
+        self.asyncSock = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.global())
+        do {
+            try asyncSock?.accept(onPort: UInt16(HTTPPort))
+            DDLogDebug("监听成功:127.0.0.1:\(HTTPPort)\n")
+        } catch {
+            DDLogError("\(#function)+\(#line) \(error.localizedDescription)")
         }
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-    @IBAction func startProxy(_ sender: Any) -> Void {
-        isRunning = true
-        if isRunning {
-            do {
-                try asyncSock?.accept(onPort: UInt16(HTTPPort))
-                DDLogDebug("监听成功:127.0.0.1:\(HTTPPort)\n")
-            } catch {
-                DDLogError("\(#function)+\(#line) \(error.localizedDescription)")
-            }
+    
+    func stopProxy() -> Void {
+        asyncSock?.disconnectAfterReadingAndWriting()
+        clients.forEach { (hash, client) in
+            client.webSocket?.disconnect(closeCode: 1000)
+            client.sock?.disconnectAfterReadingAndWriting()
         }
     }
 }
 
 /// 客户端代理协商
-extension ViewController: GCDAsyncSocketDelegate {
+extension ProxyAgent: GCDAsyncSocketDelegate {
     func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
         clients[newSocket.hash] = Socket5Proxy.init(sock: newSocket)
         newSocket.readData(forKey: .unspecified)

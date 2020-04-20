@@ -12,7 +12,7 @@ import Canary
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+    @IBOutlet weak var statusMenu: NSMenu!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -23,8 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         manager?.startLogMonitor({ () -> [String : Any]? in
             return [:]
         })
+        DDLog.add(DDTTYLogger.sharedInstance)
         DDLogInfo(NSHomeDirectory())
-        ProxyLauncher.startHttpServer()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

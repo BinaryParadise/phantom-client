@@ -9,6 +9,8 @@ target 'PhantomX' do
   pod 'CocoaAsyncSocket'
   pod 'Canary/Swift'
   pod 'CryptoSwift'
+  pod 'Preferences'
+  pod 'SwiftyJSON'
 #  pod 'Swifter'
 
   # Pods for PhantomX
