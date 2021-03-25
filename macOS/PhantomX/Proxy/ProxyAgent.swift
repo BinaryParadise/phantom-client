@@ -83,6 +83,7 @@ extension ProxyAgent: GCDAsyncSocketDelegate {
         proxy?.clear()
     }
     
+    /// 1.握手协商
     func handshake(_ sock: GCDAsyncSocket, data: Data) -> Void {
         var method = "NO ACCEPTABLE METHODS"
         switch data[1] {
@@ -102,6 +103,7 @@ extension ProxyAgent: GCDAsyncSocketDelegate {
         sock.writeData(data: resData, forKey: .negotiation_res)
     }
     
+    // 2.获取请求
     func clientConnect(_ sock: GCDAsyncSocket, data: Data) -> Void {
         //CONNECT X’01’
         //BIND X’02’
@@ -154,6 +156,7 @@ extension ProxyAgent: GCDAsyncSocketDelegate {
         })
     }
     
+    // 3.0获取转发的数据
     func dataForward(_ sock: GCDAsyncSocket, data: Data) -> Void {
         let proxy = clients[sock.hash]
         if (proxy != nil) {

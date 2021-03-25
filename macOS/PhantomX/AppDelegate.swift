@@ -17,14 +17,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         let manager = CNManager.init()
-        manager?.appKey = "com.binaryparadise.neverland"
-        manager?.enableDebug = true
-        manager?.baseURL = URL.init(string: "https://yuqi.neverland.life")
+        manager?.appKey = "9ae688845f4c2fe28f4a4b1f83c6ab03"
+        manager?.baseURL = URL.init(string: "http://frontend.xinc818.com")
         manager?.startLogMonitor({ () -> [String : Any]? in
             return [:]
         })
-        DDLog.add(DDTTYLogger.sharedInstance)
-        DDLogInfo(NSHomeDirectory())
+        DDLog.add(DDTTYLogger.sharedInstance!)
+        DDLogDebug(NSHomeDirectory())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

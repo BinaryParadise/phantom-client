@@ -47,6 +47,14 @@ enum WSPingStatus: UInt8 {
     case targetClosed    = 0x02
 }
 
+enum CommandType: UInt8 {
+    case authorization  =   0x01
+    case connect        =   0x02
+    case forward        =   0x03
+    case transport      =   0x04
+    case unsupport      =   0x00
+}
+
 /// 代理协商对象
 class Socket5Proxy: NSObject {
     var sock:GCDAsyncSocket?
@@ -72,15 +80,15 @@ class Socket5Proxy: NSObject {
         webSocket?.onEvent = { event in
             switch event {
             case .connected(let headers):
-                DDLogDebug("成功连接到\(WEBSOCKET_ADDR)")
-                self.connectTarget()
+                DDLogDebug("成功连接到\(WEBSOCKET_ADDR) \(headers)")
+                self.authorization(id: "3b8e10b8-8c7b-11eb-8dcd-0242ac130003")
             case .binary(let data):
-                self.didReceiveBinary(data: data)
+                self.didReceiveBinary(data: data, completion: completion)
             case .ping(let data):
                 self.didReceivePing(data: data ?? Data.init(), completion: completion)
             case .pong(_):
                 break
-            case .viablityChanged(_):
+            case .viabilityChanged(_):
                 break
             case .reconnectSuggested(_):
                 break
@@ -98,9 +106,23 @@ class Socket5Proxy: NSObject {
         self.webSocket?.connect()
     }
     
-    func didReceiveBinary(data: Data) -> Void {
-        DDLogWarn("收到回传数据...\(data.count)")
-        sock?.writeData(data: data, forKey: .data_forward_res)
+    func didReceiveBinary(data: Data, completion: ((Bool) -> Void)?) -> Void {
+        if let type = CommandType.init(rawValue: data.first ?? 0x00) {
+            DDLogWarn("收到回传数据...\(data.count)")
+            let resData = data.subdata(in: 1 ..< data.count-1)
+            switch type {
+            case .authorization:
+                connectTarget()
+            case .connect:
+                completion?(true)
+            case .forward:
+                sock?.writeData(data: resData, forKey: .data_forward_res)
+            case .transport:
+                sock?.writeData(data: resData, forKey: .data_forward_res)
+            default:
+                DDLogError("数据格式错误")
+            }
+        }
     }
     
     func didReceivePing(data: Data, completion:((Bool) -> Void)) -> Void {
@@ -115,10 +137,21 @@ class Socket5Proxy: NSObject {
         }
     }
     
+    func authorization(id: String) {
+        DDLogInfo("开始授权")
+        var secData = Data()
+        secData.append(CommandType.authorization.rawValue)
+        secData.append(UInt8(id.count))
+        secData.append(contentsOf: id.bytes)
+        webSocket?.write(data: secData, completion: {
+            
+        })
+    }
+    
     func connectTarget() {
-        DDLogWarn("连接目标服务\(targetAddress):\(targetPort)")
+        DDLogWarn("连接目标服务\(String(describing: targetAddress)):\(targetPort)")
         var encryptData = Data()
-        encryptData.append(0x01)
+        encryptData.append(CommandType.connect.rawValue)
         encryptData.append(targetAddress?.count.toUInt8().last ?? 0x00)
         encryptData.append(contentsOf: targetAddress!.bytes)
         encryptData.append(contentsOf: targetPort.toUInt16())
@@ -128,7 +161,7 @@ class Socket5Proxy: NSObject {
     
     func forward(data: Data) -> Void {
         var encryptData = Data()
-        encryptData.append(0x02)
+        encryptData.append(CommandType.forward.rawValue)
         encryptData.append(data)
         webSocket?.write(data: encryptData, completion: {
             DDLogDebug("Data forward to server.")

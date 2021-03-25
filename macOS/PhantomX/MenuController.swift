@@ -27,9 +27,11 @@ extension MenuController: NSMenuDelegate {
         if menuItem.state == .off {
             ProxyLauncher.shared.startProxy()
             menuItem.title = "关闭代理"
+            menuItem.state = .on
         } else {
             ProxyLauncher.shared.stopProxy()
             menuItem.title = "开启代理"
+            menuItem.state = .off
         }
     }
     

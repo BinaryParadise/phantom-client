@@ -1,6 +1,15 @@
 # Uncomment the next line to define a global platform for your project
 platform :osx, '10.11'
 
+if File.exists?('Podfile.lock')
+  puts "\033[33mPodfile.lock removed\033[0m"
+  `rm Podfile.lock`
+end
+
+install! 'cocoapods',
+  :generate_multiple_pod_projects => true,
+  :incremental_installation => true
+
 target 'PhantomX' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
