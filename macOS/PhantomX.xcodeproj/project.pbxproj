@@ -19,6 +19,7 @@
 		243858992438CECE00487EC6 /* pac in Resources */ = {isa = PBXBuildFile; fileRef = 243858982438CECE00487EC6 /* pac */; };
 		247FC7EC2441C04500350A32 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247FC7EB2441C04500350A32 /* DataUtil.swift */; };
 		B31A09567D9C7DEFCDD000AC /* Pods_PhantomXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */; };
+		C906A0452664D9B500D1A695 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906A0442664D9B500D1A695 /* Destination.swift */; };
 		C9B5E22524498A9C00D2DEE6 /* ProxyAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B5E22424498A9C00D2DEE6 /* ProxyAgent.swift */; };
 		C9B5E2272449951800D2DEE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9B5E2262449951800D2DEE6 /* MainMenu.xib */; };
 		D597A4BEB7E037428265FF8D /* Pods_PhantomX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228B910E6B52877E1F22FBD5 /* Pods_PhantomX.framework */; };
@@ -80,6 +81,7 @@
 		73DAADE5E98BA809FC012B8E /* Pods_PhantomXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhantomXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C3E78D3AF78C89FB337CEE6 /* Pods-PhantomX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomX.release.xcconfig"; path = "Target Support Files/Pods-PhantomX/Pods-PhantomX.release.xcconfig"; sourceTree = "<group>"; };
 		9DB30B44973D7A3292C527C8 /* Pods-PhantomXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhantomXTests.debug.xcconfig"; path = "Target Support Files/Pods-PhantomXTests/Pods-PhantomXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C906A0442664D9B500D1A695 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		C9B5E22424498A9C00D2DEE6 /* ProxyAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyAgent.swift; sourceTree = "<group>"; };
 		C9B5E2262449951800D2DEE6 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 			children = (
 				241A04A3243960C8003D611F /* Socket5Proxy.swift */,
 				C9B5E22424498A9C00D2DEE6 /* ProxyAgent.swift */,
+				C906A0442664D9B500D1A695 /* Destination.swift */,
 			);
 			path = Proxy;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C906A0452664D9B500D1A695 /* Destination.swift in Sources */,
 				247FC7EC2441C04500350A32 /* DataUtil.swift in Sources */,
 				2438561F2438597C00487EC6 /* MenuController.swift in Sources */,
 				2438561D2438597C00487EC6 /* AppDelegate.swift in Sources */,
@@ -495,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -549,7 +553,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -11,7 +11,7 @@ import CocoaAsyncSocket
 import Starscream
 import CocoaLumberjack
 
-//let WEBSOCKET_ADDR  = "wss://52.79.227.149:52771/phantom"
+//let WEBSOCKET_ADDR  = "wss://csgo.zhegebula.top/phantom";
 let WEBSOCKET_ADDR  = "wss://localhost:8443/phantom";
 
 #if DEBUG
@@ -57,21 +57,20 @@ enum CommandType: UInt8 {
 
 /// 代理协商对象
 class Socket5Proxy: NSObject {
-    var sock:GCDAsyncSocket?
+    var sock:GCDAsyncSocket
     var proxyData: Data
     var webSocket:WebSocket?
-    var targetAddress:String?
+    var targetAddress: Destination?
     var targetPort:Int = 0
     public var onEvent: ((WebSocketEvent) -> Void)?
 
-    init(sock: GCDAsyncSocket?) {
+    init(sock: GCDAsyncSocket) {
         proxyData = Data.init()
         self.sock = sock
     }
     
-    func startConnect(address:String?, port:Int, completion:@escaping ((Bool) -> Void)) -> Void {
+    func startConnect(_ address: Destination, completion:@escaping ((Bool) -> Void)) -> Void {
         targetAddress = address
-        targetPort = port
         var request = URLRequest(url: URL(string: WEBSOCKET_ADDR)!)
         request.timeoutInterval = 15 // Sets the timeout for the connection
         request.setValue("phantom-core", forHTTPHeaderField: "Sec-WebSocket-Protocol")
@@ -116,9 +115,9 @@ class Socket5Proxy: NSObject {
             case .connect:
                 completion?(true)
             case .forward:
-                sock?.writeData(data: resData, forKey: .data_forward_res)
+                sock.writeData(data: resData, forKey: .data_forward_res)
             case .transport:
-                sock?.writeData(data: resData, forKey: .data_forward_res)
+                sock.writeData(data: resData, forKey: .data_forward_res)
             default:
                 DDLogError("数据格式错误")
             }
@@ -149,12 +148,13 @@ class Socket5Proxy: NSObject {
     }
     
     func connectTarget() {
-        DDLogWarn("连接目标服务\(String(describing: targetAddress)):\(targetPort)")
+        guard let dst = targetAddress else { return }
+        DDLogWarn("连接目标服务\(dst.description)")
         var encryptData = Data()
         encryptData.append(CommandType.connect.rawValue)
-        encryptData.append(targetAddress?.count.toUInt8().last ?? 0x00)
-        encryptData.append(contentsOf: targetAddress!.bytes)
-        encryptData.append(contentsOf: targetPort.toUInt16())
+        encryptData.append(dst.addr.count.toUInt8().last ?? 0x00)
+        encryptData.append(dst.addr)
+        encryptData.append(contentsOf: dst.port.toUInt16())
         webSocket?.write(data: encryptData, completion: {
         })
     }
@@ -169,7 +169,7 @@ class Socket5Proxy: NSObject {
     }
     
     func clear() -> Void {
-        sock?.disconnect()
+        sock.disconnect()
         webSocket?.disconnect()
     }
 }

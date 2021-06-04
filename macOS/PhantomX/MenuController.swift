@@ -19,6 +19,9 @@ class MenuController: NSObject {
     override func awakeFromNib() {
         statusItem.menu = statusMenu
         statusItem.image = NSImage.init(named: "statusBar")
+        dynamicLogLevel = .verbose
+        DDLog.add(DDTTYLogger.sharedInstance!)
+        DDLogDebug(NSHomeDirectory())
     }
 }
 

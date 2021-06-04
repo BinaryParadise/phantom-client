@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :osx, '10.11'
+platform :osx, '10.12'
 
 if File.exists?('Podfile.lock')
   puts "\033[33mPodfile.lock removed\033[0m"
@@ -16,11 +16,11 @@ target 'PhantomX' do
   
   pod 'Starscream'
   pod 'CocoaAsyncSocket'
-  pod 'Canary/Swift'
+  pod 'CocoaLumberjack/Swift'
   pod 'CryptoSwift'
   pod 'Preferences'
   pod 'SwiftyJSON'
-#  pod 'Swifter'
+  pod 'SwifterSwift'
 
   # Pods for PhantomX
 

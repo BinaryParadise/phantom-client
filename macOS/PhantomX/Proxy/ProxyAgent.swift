@@ -9,9 +9,10 @@
 import Foundation
 import CocoaAsyncSocket
 import CocoaLumberjack
-import Canary
+import SwifterSwift
 
 let HTTPPort = 12080
+let sema = DispatchSemaphore(value: 1)
 
 class ProxyAgent: NSObject {
     var asyncSock:GCDAsyncSocket?
@@ -32,15 +33,26 @@ class ProxyAgent: NSObject {
         asyncSock?.disconnectAfterReadingAndWriting()
         clients.forEach { (hash, client) in
             client.webSocket?.disconnect(closeCode: 1000)
-            client.sock?.disconnectAfterReadingAndWriting()
+            client.sock.disconnectAfterReadingAndWriting()
         }
+    }
+    
+    func addClient(_ proxy: Socket5Proxy) -> Void {
+        sema.wait()
+        clients[proxy.sock.hash] = proxy
+        sema.signal()
+    }
+    
+    func removeClient(_ sock: GCDAsyncSocket) {
+        sema.wait()
+        clients.removeValue(forKey: sock.hash)?.clear()
     }
 }
 
 /// 客户端代理协商
 extension ProxyAgent: GCDAsyncSocketDelegate {
     func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
-        clients[newSocket.hash] = Socket5Proxy.init(sock: newSocket)
+        addClient(Socket5Proxy.init(sock: newSocket))
         newSocket.readData(forKey: .unspecified)
     }
     
@@ -79,8 +91,7 @@ extension ProxyAgent: GCDAsyncSocketDelegate {
     
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
         DDLogWarn("\(err)")
-        let proxy = clients.removeValue(forKey: sock.hash)
-        proxy?.clear()
+        removeClient(sock)
     }
     
     /// 1.握手协商
@@ -115,21 +126,11 @@ extension ProxyAgent: GCDAsyncSocketDelegate {
         // DOMAINNAME: X’03’
         // IP V6 address: X’04’
         let atyp = data[3]
-        assert(atyp == 0x03)
         //DST.ADDR代表远程服务器的地址，根据ATYP进行解析，值长度不定。
         let proxy = clients[sock.hash]
-        clients[sock.hash] = proxy
-        var hostAddr:String?
         // DST.PORT代表远程服务器的端口，要访问哪个端口的意思，值长度2个字节
-        let portData = data.subdata(in: Data.Index(data.count-2)..<data.count)
-        if atyp == 0x03 {//路由规则
-            hostAddr = String.init(data: data.subdata(in: 5..<data.count-2), encoding: .utf8)
-        } else if atyp == 0x04 {
-            hostAddr = String.init(data: data.subdata(in: 5..<11), encoding: .utf8)
-        } else {
-            hostAddr = String.init(data: data.subdata(in: 5..<9), encoding: .utf8)
-        }
-        proxy?.startConnect(address: hostAddr, port: Int(portData.toUInt16()), completion: { (connected) in
+        let dst = Destination(data: data)
+        proxy?.startConnect(dst, completion: { (connected) in
             var resData = Data.init()
             resData.append(0x05)
             //状态

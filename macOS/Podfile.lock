@@ -1,70 +1,74 @@
 PODS:
-  - Canary/Core (0.2.5):
-    - CocoaLumberjack
-    - MJExtension
-    - SAMKeychain (~> 1.5)
-    - SocketRocket (~> 0.5)
-  - Canary/Swift (0.2.5):
-    - Canary/Core
-    - CocoaLumberjack/Swift
-    - MJExtension
-    - SAMKeychain (~> 1.5)
-    - SocketRocket (~> 0.5)
   - CocoaAsyncSocket (7.6.5)
-  - CocoaLumberjack (3.7.0):
-    - CocoaLumberjack/Core (= 3.7.0)
-  - CocoaLumberjack/Core (3.7.0)
-  - CocoaLumberjack/Swift (3.7.0):
+  - CocoaLumberjack/Core (3.7.2)
+  - CocoaLumberjack/Swift (3.7.2):
     - CocoaLumberjack/Core
-  - CryptoSwift (1.3.1)
-  - MJExtension (3.2.4)
-  - Nimble (9.0.0)
-  - Preferences (2.2.1)
-  - Quick (3.1.2)
-  - SAMKeychain (1.5.3)
-  - SocketRocket (0.5.1)
+  - CryptoSwift (1.4.0)
+  - Nimble (9.2.0)
+  - Preferences (2.3.0)
+  - Quick (4.0.0)
   - Starscream (4.0.4)
-  - SwiftyJSON (5.0.0)
+  - SwifterSwift (5.2.0):
+    - SwifterSwift/AppKit (= 5.2.0)
+    - SwifterSwift/CoreAnimation (= 5.2.0)
+    - SwifterSwift/CoreGraphics (= 5.2.0)
+    - SwifterSwift/CoreLocation (= 5.2.0)
+    - SwifterSwift/Dispatch (= 5.2.0)
+    - SwifterSwift/Foundation (= 5.2.0)
+    - SwifterSwift/MapKit (= 5.2.0)
+    - SwifterSwift/SceneKit (= 5.2.0)
+    - SwifterSwift/SpriteKit (= 5.2.0)
+    - SwifterSwift/StoreKit (= 5.2.0)
+    - SwifterSwift/SwiftStdlib (= 5.2.0)
+    - SwifterSwift/UIKit (= 5.2.0)
+  - SwifterSwift/AppKit (5.2.0)
+  - SwifterSwift/CoreAnimation (5.2.0)
+  - SwifterSwift/CoreGraphics (5.2.0)
+  - SwifterSwift/CoreLocation (5.2.0)
+  - SwifterSwift/Dispatch (5.2.0)
+  - SwifterSwift/Foundation (5.2.0)
+  - SwifterSwift/MapKit (5.2.0)
+  - SwifterSwift/SceneKit (5.2.0)
+  - SwifterSwift/SpriteKit (5.2.0)
+  - SwifterSwift/StoreKit (5.2.0)
+  - SwifterSwift/SwiftStdlib (5.2.0)
+  - SwifterSwift/UIKit (5.2.0)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
-  - Canary/Swift
   - CocoaAsyncSocket
+  - CocoaLumberjack/Swift
   - CryptoSwift
   - Nimble
   - Preferences
   - Quick
   - Starscream
+  - SwifterSwift
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
-    - Canary
     - CocoaAsyncSocket
     - CocoaLumberjack
     - CryptoSwift
-    - MJExtension
     - Nimble
     - Preferences
     - Quick
-    - SAMKeychain
-    - SocketRocket
     - Starscream
+    - SwifterSwift
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Canary: c1f2dc01bbde672849f2bd0c7dcfff64f8a408e8
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
-  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
-  MJExtension: 88e0900751b6cac8de1cf724ca9838a0b28d5acb
-  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
-  Preferences: ff84aee191e7c4f2587a8ed6d753c9abc384d086
-  Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
-  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  CryptoSwift: 7cc902df1784de3b389a387756c7d710f197730c
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
+  Preferences: 74934e0d3661a343a53646679985c136a7b994bb
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: ddbc269bf791ab34a59cc81185e8cb3c1f6705f1
+PODFILE CHECKSUM: a68b48e16a66832f15713028e9cabff8f5206561
 
 COCOAPODS: 1.10.1
